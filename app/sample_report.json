@@ -1,0 +1,114 @@
+{
+  "sample": true,
+  "elapsed": 58.4,
+  "meta": {
+    "filename": "sample_history_extended_essay.docx",
+    "kind": "docx",
+    "pages": null,
+    "word_count": 4312,
+    "truncated": false,
+    "warnings": ["Images in the document were not analysed (graphs, diagrams and photographs are judged only from their captions and surrounding text)."],
+    "preview": "",
+    "rubric": {
+      "id": "ee-2027",
+      "component": "Extended Essay",
+      "subject": "Extended essay",
+      "task": "Extended essay (subject-focused or interdisciplinary pathway)",
+      "version": "New guide: first assessment May 2027 onwards",
+      "word_limit": 4000,
+      "limit_note": "4,000 words for the essay. The reflective statement on the RPF is at most 500 words and is the only evidence for criterion E.",
+      "fidelity": "summarised",
+      "notes": "",
+      "weighting": "Graded A to E; combined with TOK for up to 3 diploma points.",
+      "assessable_max": 30,
+      "total_max": 30
+    },
+    "level": null,
+    "variant": "History"
+  },
+  "precheck": [
+    {"label": "Word count", "status": "info", "detail": "About 4,312 words extracted against a limit of 4,000. Tables, captions and references are included in this estimate, so the body may still be within the limit."},
+    {"label": "Research question", "status": "ok", "detail": "A research question or question-style title was found."},
+    {"label": "Bibliography or references", "status": "ok", "detail": "A bibliography, references or works-cited section heading was found."},
+    {"label": "Citations", "status": "ok", "detail": "About 31 in-text citations and 4 web links were detected."},
+    {"label": "Reflection form (criterion E)", "status": "ok", "detail": "Reflection text (RPPF or RPF) appears to be included."},
+    {"label": "Contents page", "status": "ok", "detail": "A contents page was found."},
+    {"label": "Figures and tables", "status": "info", "detail": "About 2 numbered figure/table references and 1 extracted tables were found. Images themselves are not analysed."}
+  ],
+  "analysis": {
+    "model": {"provider": "anthropic", "model": "claude-fable-5-1"},
+    "document_summary": {
+      "title": "Rationing the Island: Food Policy and Civilian Morale in Malta, 1940 to 1943",
+      "research_question": "To what extent did the British administration's food rationing policy sustain civilian morale in Malta between June 1940 and the lifting of the siege in 1943?",
+      "subject_and_task_detected": "History extended essay (subject-focused pathway) on the Second World War siege of Malta",
+      "matches_selected_rubric": true,
+      "summary": "The student investigates how the colonial government's food rationing system affected civilian morale during the siege of Malta. The essay opens by setting out the strategic position of the island and the collapse of imports after June 1940, then examines three phases of policy: the introduction of bread rationing and Victory Kitchens in 1941, the near-starvation period before the August 1942 convoy, and the gradual relaxation of controls in 1943. Evidence comes from Governor Dobbie's and Gort's despatches, the Malta Government Gazette, two oral-history collections and the work of three historians who disagree about whether morale held because of policy or in spite of it. The student argues that rationing prevented social breakdown but that morale was sustained less by the fairness of the system than by the shared perception of external threat, concluding that the policy was a necessary but not sufficient condition for civilian resilience. The conclusion is qualified and acknowledges the limits of the oral evidence.",
+      "structure_observations": [
+        "Title page, contents page, numbered headings, footnote-style references converted to in-text citations, bibliography of 27 items and the RPF reflective statement are all present.",
+        "The extracted count of 4,312 words includes the contents page, captions and bibliography; the body text appears to be close to, but probably within, the 4,000-word limit.",
+        "One data table (weekly ration scales 1941 to 1943) is included and is referred to in the analysis."
+      ]
+    },
+    "criteria": [
+      {
+        "code": "A", "name": "Framework for the essay", "max": 6, "assessable": true, "mark": 5, "band": "5-6", "percent": 83,
+        "justification": "The research question is stated on the title page and in the introduction, is bounded by place and date, and asks for a judgement ('to what extent'), so it is focused and answerable within the length. The introduction explains the choice of primary sources (despatches, the Gazette, oral histories) and justifies the three-phase structure. The structure follows that plan and the formal elements are complete. The method section does not say how the oral-history testimonies were selected from the two collections, which leaves one part of the method under-justified, so the lower mark in the top band is appropriate.",
+        "evidence": ["\"between June 1940 and the lifting of the siege in 1943\"", "\"This essay proceeds chronologically through three phases of policy because morale responded to the supply situation rather than to policy announcements\"", "Contents page lists introduction, three analytical sections, conclusion and bibliography"],
+        "strengths": ["The research question is precise, dated and genuinely evaluative.", "The chronological structure is justified rather than assumed.", "All formal elements (title page, contents, headings, bibliography) are present and consistent."],
+        "improvements": ["State how the oral-history extracts were chosen and why those two collections are representative.", "Signpost in the introduction which historians' interpretations will be tested, so the framework announces the historiographical debate."],
+        "next_band_requires": "Full marks need every research method justified: add two or three sentences on source selection, especially for the oral testimonies."
+      },
+      {
+        "code": "B", "name": "Knowledge and understanding", "max": 6, "assessable": true, "mark": 5, "band": "5-6", "percent": 83,
+        "justification": "The essay uses a wide and relevant range of materials, including primary administrative sources and three historians with different positions. Terms such as 'morale', 'rationing', 'black market' and 'Victory Kitchens' are defined and used consistently, and the concept of morale is explicitly distinguished from compliance. Knowledge of the chronology and of the ration scales is accurate and detailed. Understanding of the historiographical context is good but one of the three historians is characterised in a single sentence, so the engagement with that position is thinner than with the other two.",
+        "evidence": ["\"Morale is used here in the sense defined by the Ministry of Information's weekly reports: the willingness of civilians to continue cooperating with the authorities\"", "Table 1 reproduces weekly bread, sugar and fat allowances for March 1941, April 1942 and January 1943 with Gazette references"],
+        "strengths": ["Key concepts are defined operationally at the start and applied consistently.", "Primary administrative sources are read closely and cited precisely.", "The ration-scale table anchors the argument in accurate data."],
+        "improvements": ["Give the third historian's argument the same depth as the other two before disagreeing with it.", "Add brief context on how Malta's rationing compared with Britain's, which the essay mentions but does not develop."],
+        "next_band_requires": "Comprehensive treatment of all the cited historiography, not only two of the three positions."
+      },
+      {
+        "code": "C", "name": "Analysis and line of argument", "max": 6, "assessable": true, "mark": 4, "band": "3-4", "percent": 67,
+        "justification": "Each section analyses the evidence in relation to the question and reaches an interim judgement, and the argument that policy was necessary but not sufficient is visible from the introduction onwards. However, the second section (the 1942 crisis) spends roughly 600 words narrating the convoy battles before returning to morale, and the link between the Victory Kitchens evidence and the question is asserted rather than demonstrated. The line of argument is therefore present but not sustained throughout, which fits the 3 to 4 band; the upper mark is given because the other two sections analyse consistently.",
+        "evidence": ["\"Operation Pedestal's losses are well documented: of fourteen merchant ships, five reached Grand Harbour...\" (narrative passage continues for two pages)", "\"The Victory Kitchens were unpopular, as the oral histories show, yet they clearly sustained morale\""],
+        "strengths": ["Interim conclusions at the end of each section keep the argument moving.", "The distinction between 'preventing breakdown' and 'sustaining morale' is analytically useful and consistently applied in sections one and three."],
+        "improvements": ["Cut the narrative of the August 1942 convoy to a paragraph and spend the recovered words on what the food crisis did to morale.", "Show, with the oral testimony, how unpopular kitchens could still sustain morale rather than stating that they 'clearly' did.", "Begin each paragraph with a claim that answers the question, then introduce the evidence."],
+        "next_band_requires": "A coherent line of argument sustained throughout: remove the narrative detour in section two and make every paragraph analytical."
+      },
+      {
+        "code": "D", "name": "Discussion and evaluation", "max": 8, "assessable": true, "mark": 5, "band": "5-6", "percent": 63,
+        "justification": "The conclusion discusses the significance of the findings in relation to the three historians and reaches a balanced, qualified judgement supported by the evidence presented. Evaluation of the essay's own limits is present but partial: the student notes that oral testimonies were collected decades later and may be shaped by later patriotic narratives, which is a specific and relevant limitation, but does not evaluate the reliability of the governors' despatches, which have an obvious interest in reporting steady morale. Strengths of the approach are not discussed at all. This is a mostly balanced discussion with specific but incomplete evaluation, matching the 5 to 6 band at its lower mark.",
+        "evidence": ["\"Testimonies recorded in the 1990s describe a unity that the 1942 police reports on looting qualify\"", "\"Rationing was a necessary condition for civilian resilience; it was not a sufficient one\""],
+        "strengths": ["The conclusion is genuinely evaluative and consistent with the body of the essay.", "The limitation of retrospective oral testimony is identified and its effect on the findings explained."],
+        "improvements": ["Evaluate the despatches as sources: who wrote them, for whom, and what they had reason to emphasise.", "Discuss what the chosen method could and could not show (for example, that morale among rural and urban populations may have differed).", "Name one or two strengths of the approach, not only its limits."],
+        "next_band_requires": "Convincing evaluation of how effective the whole essay has been: cover the reliability of all the main source types and the implications of those limits for the conclusion."
+      },
+      {
+        "code": "E", "name": "Reflection", "max": 4, "assessable": true, "mark": 3, "band": "3-4", "percent": 75,
+        "justification": "The reflective statement is evaluative rather than a diary of what was done. It gives a specific example of how discovering the police reports on looting forced the student to abandon the original thesis that rationing 'created unity', and it describes a transferable skill (triangulating testimony against contemporary records) that the student has since applied in another subject. It is slightly shorter on how the experience changed the student's view of history as a discipline, so the lower mark in the top band is given.",
+        "evidence": ["\"Finding the looting reports was uncomfortable because it meant my first question had assumed its own answer\"", "\"I now check who produced a source before I ask what it says, which I used in my TOK exhibition\""],
+        "strengths": ["A concrete turning point is described and linked to a change in the research question.", "Transfer of learning to another context is shown with a specific example."],
+        "improvements": ["Add one sentence on what the project taught the student about how historians establish claims about attitudes, not only about source handling."],
+        "next_band_requires": "The statement is already in the top band; full marks need slightly fuller evidence of growth as a learner."
+      }
+    ],
+    "overall_strengths": [
+      "A precise, evaluative research question with a justified structure.",
+      "Close reading of primary administrative sources combined with a real historiographical debate.",
+      "A qualified conclusion that follows from the evidence rather than overstating it.",
+      "An authentic reflective statement that shows a change of mind during the research."
+    ],
+    "priority_improvements": [
+      {"priority": 1, "area": "Sustain the argument in section two", "action": "Replace the two pages of convoy narrative with analysis of what the 1942 food crisis did to morale, using the police reports and testimonies already in the bibliography. This is where most marks were lost under criterion C and it also frees words for evaluation.", "criteria": ["C"]},
+      {"priority": 2, "area": "Evaluate the official sources", "action": "Add a short evaluation of the governors' despatches and the Government Gazette as sources with their own purposes, and state what that means for the conclusion. Criterion D carries the most marks and this is the clearest gap.", "criteria": ["D"]},
+      {"priority": 3, "area": "Justify source selection", "action": "In the introduction, explain how oral testimonies were selected and why the two collections are representative, which completes the method under criterion A.", "criteria": ["A"]},
+      {"priority": 4, "area": "Balance the historiography", "action": "Develop the third historian's position to the same depth as the other two before disagreeing with it.", "criteria": ["B", "D"]},
+      {"priority": 5, "area": "Confirm the word count", "action": "Check that the body text (excluding contents, captions and bibliography) is at or under 4,000 words; the extracted total of 4,312 suggests it is close to the limit.", "criteria": ["A"]}
+    ],
+    "integrity_flags": [
+      "Extracted word count (4,312) exceeds 4,000, but the count includes the contents page, captions and bibliography; verify the body-text count before submission."
+    ],
+    "confidence": "high",
+    "confidence_reason": "The document is complete, clearly structured and the reflective statement is included; the only uncertainty is the exact body word count.",
+    "total": {"mark": 22, "max": 30, "task_max": 30, "percent": 73, "indicative_grade": "B", "grade_note": "Provisional estimate only: official boundaries for the 30-mark model will be published after the first sessions."}
+  }
+}

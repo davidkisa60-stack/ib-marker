@@ -1,0 +1,26 @@
+# Render blueprint: in the Render dashboard choose New > Blueprint, pick this repository,
+# and Render builds a free Python web service from this file. It will ask you for the
+# values marked "sync: false" (your API key and an access code) and store them as
+# environment variables, so they never appear in the code.
+services:
+  - type: web
+    name: ib-marker
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.7"
+      # The shared key every teacher uses. Set the one for the provider you chose;
+      # Gemini (free tier) is the recommended default. Others: IB_MISTRAL_API_KEY,
+      # IB_COHERE_API_KEY, IB_NVIDIA_API_KEY, IB_OPENROUTER_API_KEY, IB_ANTHROPIC_API_KEY.
+      - key: IB_GEMINI_API_KEY
+        sync: false
+      # A password the app asks for once per browser, so outsiders cannot use the shared key.
+      - key: IB_ACCESS_CODE
+        sync: false
+      # Analyses per user per hour on the shared key (protects the free-tier daily quota).
+      - key: IB_RATE_LIMIT
+        value: "40"

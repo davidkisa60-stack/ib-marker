@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IB Marker: criteria-based feedback on student work</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">IB</span>
+    <div>
+      <h1>IB Marker</h1>
+      <p>Upload student work, choose the IB task, get a mark and feedback for every criterion</p>
+    </div>
+  </div>
+  <div class="topbar-actions">
+    <button id="btn-history" class="ghost" type="button">Recent</button>
+    <button id="btn-settings" class="ghost" type="button">Settings</button>
+  </div>
+</header>
+
+<main class="layout">
+  <!-- ===================== SETUP PANEL ===================== -->
+  <section class="panel setup" id="setup-panel">
+    <h2>1. Choose the assessment</h2>
+
+    <div class="field">
+      <label>Component</label>
+      <div class="segmented" id="component-seg">
+        <button type="button" data-value="Internal Assessment" class="active">Internal assessment</button>
+        <button type="button" data-value="Extended Essay">Extended essay</button>
+        <button type="button" data-value="Theory of Knowledge">TOK</button>
+        <button type="button" data-value="custom">Custom rubric</button>
+      </div>
+    </div>
+
+    <div id="builtin-fields">
+      <div class="field">
+        <label for="subject-select">Subject</label>
+        <select id="subject-select"></select>
+      </div>
+      <div class="field" id="version-field">
+        <label for="version-select">Guide version / task</label>
+        <select id="version-select"></select>
+      </div>
+      <div class="row">
+        <div class="field" id="level-field">
+          <label for="level-select">Level</label>
+          <select id="level-select"></select>
+        </div>
+        <div class="field" id="variant-field">
+          <label for="variant-select" id="variant-label">Variant</label>
+          <select id="variant-select"></select>
+        </div>
+      </div>
+      <div class="rubric-card" id="rubric-card"></div>
+    </div>
+
+    <div id="custom-fields" class="hidden">
+      <p class="hint">Define your own criteria (for a new guide, a school task, or a rubric that is not in the library). Saved in this browser.</p>
+      <div class="field"><label for="custom-name">Task name</label><input id="custom-name" placeholder="e.g. Dance investigating dance (2029 guide)"></div>
+      <div class="row">
+        <div class="field"><label for="custom-subject">Subject</label><input id="custom-subject" placeholder="Subject"></div>
+        <div class="field"><label for="custom-limit">Word limit (optional)</label><input id="custom-limit" type="number" min="0" placeholder="e.g. 2000"></div>
+      </div>
+      <div id="custom-criteria"></div>
+      <div class="row gap">
+        <button type="button" class="ghost small" id="custom-add">Add criterion</button>
+        <button type="button" class="ghost small" id="custom-clear">Clear</button>
+      </div>
+    </div>
+
+    <h2>2. Upload the student's work</h2>
+    <div class="dropzone" id="dropzone" tabindex="0">
+      <input type="file" id="file-input" accept=".pdf,.docx,.doc,.txt,.md" hidden>
+      <div class="dz-inner">
+        <div class="dz-icon">&#8679;</div>
+        <p><strong>Drop a PDF or Word file here</strong> or click to browse</p>
+        <p class="muted">.pdf, .docx, .txt, .md up to 20 MB. Images inside the file are not analysed.</p>
+      </div>
+      <div class="dz-file hidden" id="dz-file"></div>
+    </div>
+
+    <div class="field">
+      <label for="teacher-notes">Notes for the examiner (optional)</label>
+      <textarea id="teacher-notes" rows="3" placeholder="e.g. First draft. The RPPF is pasted at the end. Focus feedback on criterion C."></textarea>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="primary" id="btn-analyse">Analyse and mark</button>
+      <button type="button" class="ghost" id="btn-precheck">Pre-check only</button>
+    </div>
+    <p class="hint" id="key-status"></p>
+    <p class="hint">
+      Marking runs on an AI model of your choice. Free tiers from Google Gemini, Mistral, Cohere, NVIDIA and OpenRouter work without a card, or run a local model with Ollama. Marks are a starting point for the teacher's own judgement, not IB-moderated results.
+      <a href="#" id="btn-sample">See a sample report</a>.
+    </p>
+  </section>
+
+  <!-- ===================== RESULTS PANEL ===================== -->
+  <section class="panel results" id="results-panel">
+    <div id="results-empty" class="empty">
+      <div class="empty-art">&#9998;</div>
+      <h3>No analysis yet</h3>
+      <p>Choose the component, subject and guide version, upload the document and click <em>Analyse and mark</em>. The report shows what the student is researching, a mark with strengths and improvements for each criterion, the total mark and the priorities for improvement.</p>
+    </div>
+
+    <div id="results-progress" class="progress hidden">
+      <div class="spinner"></div>
+      <div>
+        <h3 id="progress-title">Analysing…</h3>
+        <p id="progress-detail" class="muted">Extracting text, checking formal requirements, then marking each criterion. This usually takes 30 to 120 seconds; free tiers can be slower.</p>
+        <p class="muted"><span id="progress-timer">0</span> s elapsed</p>
+      </div>
+    </div>
+
+    <div id="results-error" class="error hidden"></div>
+
+    <div id="report" class="report hidden"></div>
+  </section>
+</main>
+
+<!-- ===================== SETTINGS DIALOG ===================== -->
+<dialog id="settings-dialog">
+  <form method="dialog" class="dialog-body">
+    <h2>Settings: which AI marks the work</h2>
+    <p class="hint">Pick a provider, paste its key, test, save. The free tiers need no card. Keys stay in this browser and are sent to this server only with each analysis; the server never stores them.</p>
+
+    <div class="field">
+      <label for="provider-select">Provider</label>
+      <select id="provider-select"></select>
+    </div>
+    <div class="provider-info" id="provider-info"></div>
+
+    <div class="field" id="base-url-field">
+      <label for="base-url-input">Base URL</label>
+      <input id="base-url-input" placeholder="https://.../v1">
+    </div>
+    <div class="field">
+      <label for="model-input">Model</label>
+      <input id="model-input" list="model-options" placeholder="model name" autocomplete="off">
+      <datalist id="model-options"></datalist>
+    </div>
+    <div class="field" id="key-field">
+      <label for="api-key-input">API key</label>
+      <input id="api-key-input" type="password" autocomplete="off" placeholder="paste the key here">
+      <p class="hint" id="key-hint"></p>
+      <label class="check"><input type="checkbox" id="remember-key"> Remember keys in this browser</label>
+    </div>
+
+    <div class="field hidden" id="access-field">
+      <label for="access-code-input">Access code for this server</label>
+      <input id="access-code-input" type="password" autocomplete="off" placeholder="code from your IB coordinator">
+      <p class="hint">This server has a shared, built-in API key. The access code stops outsiders from using it.</p>
+    </div>
+
+    <div class="actions test-row">
+      <button type="button" class="ghost" id="settings-test">Test connection</button>
+      <span id="test-result" class="test-result"></span>
+    </div>
+
+    <p class="privacy-note"><b>Student privacy.</b> Free tiers usually let the provider use what you send to improve their models. Remove student names from documents, check your school's data policy, and prefer a local model or a paid plan when confidentiality matters.</p>
+
+    <div class="actions">
+      <button type="submit" class="primary" id="settings-save">Save</button>
+      <button type="button" class="ghost" id="settings-cancel">Cancel</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ===================== HISTORY DIALOG ===================== -->
+<dialog id="history-dialog">
+  <div class="dialog-body">
+    <h2>Recent analyses</h2>
+    <p class="hint">Stored in this browser only. Open a report again or clear the list.</p>
+    <ul id="history-list" class="history"></ul>
+    <div class="actions">
+      <button type="button" class="ghost" id="history-clear">Clear list</button>
+      <button type="button" class="primary" id="history-close">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="/static/config.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

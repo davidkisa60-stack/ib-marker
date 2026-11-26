@@ -1,0 +1,14 @@
+# Netlify can host the PAGE only. The Python API cannot run on Netlify (its functions are
+# JavaScript/Go with a 10 to 26 second limit, and proxy rewrites also stop after 26 seconds,
+# while marking takes 30 to 120 seconds). Run the API on Render (see render.yaml) and put its
+# address in app/static/config.js before deploying this site. On the API server set
+# IB_CORS_ORIGINS to this site's address, for example https://ib-marker.netlify.app.
+[build]
+  command = "mkdir -p dist/static && cp -r app/static/. dist/static/ && cp app/static/index.html dist/index.html"
+  publish = "dist"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
